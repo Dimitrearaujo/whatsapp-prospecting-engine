@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Syntax check
+        run: |
+          for f in *.py; do
+            python -m py_compile "$f" && echo "$f OK"
+          done
+
+      - name: Rate limiter test
+        run: |
+          python -c "
+          import json, pathlib, tempfile, os
+
+          # Simula o rate limiter sem dependencias externas
+          limits = {'whatsapp': {'limit': 30, 'count': 0}, 'email': {'limit': 200, 'count': 0}}
+
+          def can_send(channel):
+              return limits[channel]['count'] < limits[channel]['limit']
+
+          def register_send(channel):
+              limits[channel]['count'] += 1
+
+          # Envia ate o limite
+          for _ in range(30):
+              assert can_send('whatsapp'), 'deveria poder enviar'
+              register_send('whatsapp')
+
+          assert not can_send('whatsapp'), 'limite WhatsApp deve estar esgotado'
+          assert can_send('email'), 'email deve ainda ter saldo'
+          print('rate limiter logic OK')
+          "

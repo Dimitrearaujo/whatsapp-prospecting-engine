@@ -1,5 +1,7 @@
 # WhatsApp Prospecting Engine
 
+![CI](https://github.com/Dimitrearaujo/whatsapp-prospecting-engine/actions/workflows/ci.yml/badge.svg)
+
 Motor de prospeccao outbound automatizado — busca leads no Google Maps via Apify, dispara mensagens personalizadas pelo WhatsApp (Evolution API) e email (Resend), com rate limiter anti-bloqueio e agente IA BANT para qualificacao de respostas.
 
 Em producao: 30 mensagens WhatsApp/dia e 200 emails/dia com delay aleatorio entre envios.
