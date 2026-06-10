@@ -1,0 +1,29 @@
+{
+  "evolution_api": {
+    "url": "http://localhost:8080",
+    "instance": "operacao-ia",
+    "api_key": "SEU_API_KEY_EVOLUTION"
+  },
+  "openai": {
+    "api_key": "sk-..."
+  },
+  "resend": {
+    "api_key": "re_...",
+    "from_email": "onboarding@resend.dev",
+    "from_name": "Lucas Mendes"
+  },
+  "apify": {
+    "token": "apify_api_..."
+  },
+  "rate_limits": {
+    "whatsapp_per_day": 30,
+    "email_per_day": 200,
+    "min_delay_seconds": 60,
+    "max_delay_seconds": 120
+  },
+  "agent": {
+    "name": "Lucas Mendes",
+    "company": "CD Tech",
+    "tone": "vendas"
+  }
+}

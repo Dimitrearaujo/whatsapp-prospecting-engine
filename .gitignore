@@ -1,0 +1,11 @@
+config.json
+*.env
+__pycache__/
+*.pyc
+*.db
+*.db-shm
+*.db-wal
+logs/
+data/
+*.log
+.operacao-ia/
