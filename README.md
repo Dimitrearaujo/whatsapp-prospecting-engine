@@ -121,27 +121,28 @@ In production: 30 WhatsApp messages/day and 200 emails/day with random delay bet
 | `apify_scraper.py` | Lead scraping on Google Maps via Apify |
 | `copy_generator.py` | Personalized message generator by segment |
 | `monitor.py` | 24/7 monitor — alerts on WhatsApp if something goes down |
+| `lib.py` | Shared utilities, paths, config |
 
 ## Installation
 
-`ash
+```bash
 git clone https://github.com/Dimitrearaujo/whatsapp-prospecting-engine
 cd whatsapp-prospecting-engine
 pip install -r requirements.txt
 
 cp config.example.json config.json
 # Edit config.json with your keys
-`
+```
 
 **Prerequisites:**
 - Evolution API running (WhatsApp connected)
 - Resend account (3,000 emails/month free)
-- Apify token (lead scraping — /month free tier)
+- Apify token (lead scraping — $5/month free tier)
 - OpenAI key (BANT agent)
 
 ## Usage
 
-`ash
+```bash
 # Search for new leads (Apify scraping)
 python prospecting_engine.py --search
 
@@ -151,9 +152,15 @@ python prospecting_engine.py --send
 # Simulate without sending
 python prospecting_engine.py --send --dry-run
 
-# Daily full routine (search + send)
+# Mark lead as responded
+python prospecting_engine.py --mark-responded 5585999990000
+
+# Open dashboard in browser
+python prospecting_engine.py --dashboard
+
+# Full daily routine (search + send)
 python prospecting_engine.py --daily --limit 30
-`
+```
 
 ## Rate Limiter
 
@@ -172,3 +179,7 @@ Veterinary, dental and aesthetic clinics, gyms, pilates/yoga studios — persona
 MIT
 
 </details>
+
+---
+
+[← Back to profile](https://github.com/Dimitrearaujo)
