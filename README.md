@@ -96,3 +96,79 @@ Clinicas veterinarias, odontologicas e esteticas, academias, studios de pilates/
 ## Licenca
 
 MIT
+
+---
+
+<details>
+<summary>🇺🇸 English</summary>
+
+# WhatsApp Prospecting Engine
+
+![CI](https://github.com/Dimitrearaujo/whatsapp-prospecting-engine/actions/workflows/ci.yml/badge.svg)
+
+Automated outbound prospecting engine — finds leads on Google Maps via Apify, sends personalized messages via WhatsApp (Evolution API) and email (Resend), with anti-block rate limiter and AI BANT agent for response qualification.
+
+In production: 30 WhatsApp messages/day and 200 emails/day with random delay between sends.
+
+## Modules
+
+| File | Function |
+|---|---|
+| `prospecting_engine.py` | Main engine — search, dispatch, dashboard |
+| `agent_bant.py` | AI agent that responds leads via WhatsApp (BANT + GPT) |
+| `rate_limiter.py` | Daily limit control with random human-like delay |
+| `dispatcher.py` | Multi-channel dispatcher (WhatsApp + Email) |
+| `apify_scraper.py` | Lead scraping on Google Maps via Apify |
+| `copy_generator.py` | Personalized message generator by segment |
+| `monitor.py` | 24/7 monitor — alerts on WhatsApp if something goes down |
+
+## Installation
+
+`ash
+git clone https://github.com/Dimitrearaujo/whatsapp-prospecting-engine
+cd whatsapp-prospecting-engine
+pip install -r requirements.txt
+
+cp config.example.json config.json
+# Edit config.json with your keys
+`
+
+**Prerequisites:**
+- Evolution API running (WhatsApp connected)
+- Resend account (3,000 emails/month free)
+- Apify token (lead scraping — /month free tier)
+- OpenAI key (BANT agent)
+
+## Usage
+
+`ash
+# Search for new leads (Apify scraping)
+python prospecting_engine.py --search
+
+# Send messages (WhatsApp + Email)
+python prospecting_engine.py --send
+
+# Simulate without sending
+python prospecting_engine.py --send --dry-run
+
+# Daily full routine (search + send)
+python prospecting_engine.py --daily --limit 30
+`
+
+## Rate Limiter
+
+The `rate_limiter.py` ensures the daily limit is never exceeded and adds random delay between sends for human-like behavior:
+
+- WhatsApp: 30/day, 60-120s delay between messages
+- Email: 200/day, 15-30s delay between emails
+- JSON persistence — survives restarts
+
+## Supported segments
+
+Veterinary, dental and aesthetic clinics, gyms, pilates/yoga studios — personalized messages per segment via `copy_generator.py`.
+
+## License
+
+MIT
+
+</details>
